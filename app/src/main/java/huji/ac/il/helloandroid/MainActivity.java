@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     EditText mTextInput;
     TextView mChatContent;
-    int mCurrentMessageCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
