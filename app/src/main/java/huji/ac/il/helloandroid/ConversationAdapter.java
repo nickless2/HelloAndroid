@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by thepoosh on 03/02/2017.
@@ -19,7 +20,7 @@ import java.util.List;
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationHolder> {
     private static final String TAG = "ConversationAdapter";
     List<Pair<Long, String>> mChatItems = new ArrayList<>();
-    DateFormat FORMAT = new SimpleDateFormat("HH:mm");
+    DateFormat FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
     @Override
     public ConversationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,7 +33,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         return mChatItems.size();
     }
 
-    public void addItem(long when, String what) {
+    void addItem(long when, String what) {
         Pair<Long, String> item = new Pair<>(when, what);
         mChatItems.add(item);
         notifyItemInserted(mChatItems.size());
@@ -45,11 +46,11 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         holder.content.setText(currentItem.second);
     }
 
-    public static class ConversationHolder extends RecyclerView.ViewHolder {
+    static class ConversationHolder extends RecyclerView.ViewHolder {
         TextView timestamp;
         TextView content;
 
-        public ConversationHolder(View itemView) {
+        ConversationHolder(View itemView) {
             super(itemView);
             timestamp = (TextView) itemView.findViewById(R.id.timestamp);
             content = (TextView) itemView.findViewById(R.id.text);
