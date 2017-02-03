@@ -2,6 +2,8 @@ package huji.ac.il.helloandroid;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -14,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     EditText mTextInput;
-    TextView mChatContent;
+    RecyclerView mChatContent;
+    ConversationAdapter mAdapter;
     ImageView mSend;
 
     @Override
@@ -41,15 +44,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mChatContent = (TextView) findViewById(R.id.conversation);
-
+        mChatContent = (RecyclerView) findViewById(R.id.conversation);
+        mAdapter = new ConversationAdapter();
+        mChatContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mChatContent.setAdapter(mAdapter);
 
     }
 
     private void appendLine(TextView v) {
-        StringBuilder currentChat = new StringBuilder(mChatContent.getText());
-        currentChat.append(v.getText()).append('\n');
-        mChatContent.setText(currentChat.toString());
-        mTextInput.setText("");
+        String content = v.getText().toString();
+        long time = System.currentTimeMillis();
+        mAdapter.addItem(time, content);
     }
 }

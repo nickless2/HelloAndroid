@@ -19,11 +19,12 @@
         android:text="@string/chat"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/conversation"
+        android:layout_above="@+id/text_input"
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"/>
+        android:layout_height="wrap_content"/>
 
 
     <ImageView
@@ -38,8 +39,8 @@
         android:id="@+id/text_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/send"
         android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/send"
         android:hint="@string/text_input_hint"
         android:imeOptions="actionSend"
         android:inputType="textCapSentences|textAutoCorrect"
